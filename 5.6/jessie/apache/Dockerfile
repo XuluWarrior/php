@@ -215,7 +215,7 @@ RUN set -eux; \
 		\
 		--with-curl \
 		--with-libedit \
-		--with-openssl \
+#		--with-openssl \
 		--with-zlib \
         --with-mysql \
 		--with-mysqli \
