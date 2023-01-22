@@ -6,6 +6,8 @@
 
 FROM debian:jessie
 
+COPY ["INSECURE", "/etc/apt/apt.conf.d/"]
+
 # prevent Debian's PHP packages from being installed
 # https://github.com/docker-library/php/pull/542
 RUN set -eux; \
