@@ -8,6 +8,11 @@ FROM debian:jessie
 
 COPY ["INSECURE", "/etc/apt/apt.conf.d/"]
 
+RUN rm /etc/apt/sources.list
+RUN echo 'deb http://archive.debian.org/debian/ jessie main' > /etc/apt/sources.list.d/jessie.list
+RUN echo 'deb http://archive.debian.org/debian-security jessie/updates main' > /etc/apt/sources.list.d/jessie-updates.list
+RUN echo 'deb http://archive.debian.org/debian jessie-backports main' > /etc/apt/sources.list.d/jessie-backports.list
+
 # prevent Debian's PHP packages from being installed
 # https://github.com/docker-library/php/pull/542
 RUN set -eux; \
