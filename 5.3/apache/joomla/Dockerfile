@@ -267,7 +267,11 @@ RUN set -eux; \
 
 COPY docker-php-ext-* docker-php-entrypoint /usr/local/bin/
 
-RUN set -eux; apt-get update; apt-get install -y libjpeg-dev libpng-dev; docker-php-ext-configure gd --with-jpeg-dir=/usr/local/; docker-php-ext-install gd;
+RUN set -eux; apt-get update; apt-get install -y libjpeg-dev libpng-dev libfreetype6-dev; \
+    mkdir /usr/include/freetype2/freetype; \
+    ln -s /usr/include/freetype2/freetype.h /usr/include/freetype2/freetype/freetype.h; \
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/freetype2/ --with-jpeg-dir=/usr/local/; \
+    docker-php-ext-install gd;
 RUN set -eux; apt-get update; apt-get install -y libzip-dev zlib1g-dev; docker-php-ext-install zip;
 
 RUN set -eux; a2enmod rewrite
